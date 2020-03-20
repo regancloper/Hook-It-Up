@@ -3,17 +3,18 @@ import React, { useState, useEffect } from 'react';
 
 const AlbumDetail = (props) => {
 
-    const [details, setDetails] = useState([]);
+    const [details, setDetails] = useState({});
 
-    const getDetails = async () => {
-        let res = await fetch(`https://jsonplaceholder.typicode.com/albums/${props.match.params.id}`);
-        let details = await res.json();
-        setDetails(details);
-    }
+    
 
     useEffect(() => {
+        const getDetails = async () => {
+            let res = await fetch(`https://jsonplaceholder.typicode.com/albums/${props.match.params.id}`);
+            let details = await res.json();
+            setDetails(details);
+        }
         getDetails();
-    }, []);
+    }, [props.match.params.id]);
 
     return (
         <div className="container my-4">
